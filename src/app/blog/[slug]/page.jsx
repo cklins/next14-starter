@@ -9,13 +9,32 @@ const getData = async (slug) => {
   if (!res.ok) {
     throw new Error("Something went wrong");
   }
-
+  // console.log(res.json());
   return res.json();
 };
+
+const apiRouteTest = async () => {
+  const res = await fetch("http://localhost:3000/api/post");
+
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+  // const res = await fetch("http://localhost:3000/api/post");
+
+  // if (!res.ok) {
+  //   throw new Error("Something went wrong");
+  // }
+
+  // return res.json();
+};
+
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
 
   const post = await getData(slug);
+  await apiRouteTest();
 
   return {
     title: post.title,

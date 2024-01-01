@@ -6,8 +6,10 @@ export const metadata = {
   description: "About description",
 };
 
-const AboutPage = () => {
+const AboutPage = async () => {
   // console.log("lets check where it works")
+
+  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
