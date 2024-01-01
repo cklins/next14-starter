@@ -9,7 +9,7 @@ export const metadata = {
 const AboutPage = async () => {
   // console.log("lets check where it works")
 
-  console.log(data);
+  // console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>

@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDb } from "./utils";
 import { User } from "./models";
 import bcrypt from "bcryptjs";
+import { authConfig } from "./auth.config";
 export const {
   handlers: { GET, POST },
   auth,
@@ -51,7 +52,30 @@ export const {
       }
       return true;
     },
+    async jwt({ token, user }) {
+      // console.log("----jwt-----");
+      // console.log(token);
+      // console.log(user);
+      // console.log("----jwt-----!");
+      if (user) {
+        token.id = user.id;
+        token.isAdmin = user.isAdmin;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // console.log("----session-----");
+      // console.log(session);
+      // console.log(token);
+      // console.log("----session-----!");
+      if (token) {
+        session.user.id = token.id;
+        session.user.isAdmin = token.isAdmin;
+      }
+      return session;
+    },
   },
+  ...authConfig.callbacks,
 });
 
 const login = async (credentials) => {
